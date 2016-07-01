@@ -9,6 +9,8 @@ import configureStore from 'stores/configureStore';
 
 const store = configureStore();
 
+import './topcoat-mobile-light.css';
+
 ReactDOM.render((
   <Provider store={ store }>
     <Router history={ hashHistory }>
