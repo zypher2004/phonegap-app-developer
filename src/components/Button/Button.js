@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Tappable from 'react-tappable';
 
 import './index.css';
 
@@ -10,9 +11,13 @@ const Button = (props) => {
     'topcoat-button': true,
   });
   return (
-    <button className={ cx } onClick={ props.clickHandler }>
+    <Tappable
+      component="button"
+      className={ cx }
+      onTap={ props.clickHandler }
+    >
       { props.children || <span>&nbsp;</span> }
-    </button>
+    </Tappable>
   );
 };
 
