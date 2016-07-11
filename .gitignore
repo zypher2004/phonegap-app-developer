@@ -11,3 +11,7 @@ npm-debug.log
 
 # res
 resources/signing
+
+# Webpack targets
+/www/bundle.js
+/www/bundle.js.map
