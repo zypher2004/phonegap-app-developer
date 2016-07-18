@@ -6,8 +6,8 @@ import './index.css';
 
 const Button = (props) => {
   const cx = classNames({
-    full: true,
-    pgbutton: true,
+    full: props.full || false,
+    'pg-button': true,
     'topcoat-button': true,
   });
   return (
@@ -24,6 +24,7 @@ const Button = (props) => {
 Button.propTypes = {
   children: React.PropTypes.any,
   clickHandler: React.PropTypes.func,
+  full: React.PropTypes.bool,
 };
 
 export default Button;
