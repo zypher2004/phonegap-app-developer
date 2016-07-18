@@ -35,7 +35,7 @@ const Main = React.createClass({
           <span key="connect">Connect</span>
           <span key="saved">Saved Projects</span>
         </TabBar>
-        <Button full clickHandler={ this.handleButtonClick }>A Button</Button>
+        <Button full cta clickHandler={ this.handleButtonClick }>Connect</Button>
       </div>
     );
   },

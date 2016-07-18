@@ -5,10 +5,12 @@ import Tappable from 'react-tappable';
 import './index.css';
 
 const Button = (props) => {
+  const cta = props.cta || false;
   const cx = classNames({
     full: props.full || false,
     'pg-button': true,
-    'topcoat-button': true,
+    'topcoat-button': !cta,
+    'topcoat-button--cta': cta,
   });
   return (
     <Tappable
@@ -24,6 +26,7 @@ const Button = (props) => {
 Button.propTypes = {
   children: React.PropTypes.any,
   clickHandler: React.PropTypes.func.isRequired,
+  cta: React.PropTypes.bool,
   full: React.PropTypes.bool,
 };
 
