@@ -11,11 +11,12 @@ const TabBar = (props) => {
     'topcoat-tab-bar': true,
   });
   const tabs = props.children.map(child => (
-    <label className="topcoat-tab-bar__item">
+    <label key={ child.key } className="topcoat-tab-bar__item">
       <input type="radio" name={ props.name } />
       <Tappable
         component="button"
         className="topcoat-tab-bar__button"
+        onTap={ () => props.clickHandler(child.key) }
       >
         { child }
       </Tappable>
@@ -30,6 +31,7 @@ const TabBar = (props) => {
 
 TabBar.propTypes = {
   children: React.PropTypes.any,
+  clickHandler: React.PropTypes.func.isRequired,
   full: React.PropTypes.bool,
   name: React.PropTypes.string.isRequired,
 };

@@ -12,7 +12,11 @@ const IconButton = (props) => {
     'pg-icon-button': true,
   });
   return (
-    <Tappable component="button" className={ cx }>
+    <Tappable
+      component="button"
+      className={ cx }
+      onTap={ props.clickHandler }
+    >
       { props.children || <span className="topcoat-icon">&nbsp;</span> }
     </Tappable>
   );
@@ -20,6 +24,7 @@ const IconButton = (props) => {
 
 IconButton.propTypes = {
   children: React.PropTypes.any,
+  clickHandler: React.PropTypes.func.isRequired,
   quiet: React.PropTypes.bool,
 };
 

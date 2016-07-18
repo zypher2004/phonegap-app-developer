@@ -42,6 +42,7 @@ const common = {
   postcss() {
     return [autoprefixer, precss];
   },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
