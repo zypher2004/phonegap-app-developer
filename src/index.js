@@ -10,7 +10,7 @@ import configureStore from 'stores/configureStore';
 
 const store = configureStore();
 
-import './topcoat-mobile-light.css';
+import './topcoat-mobile-light.min.css';
 import './index.css';
 
 ReactDOM.render((
