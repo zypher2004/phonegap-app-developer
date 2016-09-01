@@ -85,11 +85,11 @@
         <icon height="110" src="resources/icon/wp8/TileSmall.png" width="110" />
     </platform>
     <platform name="android">
-        <content src="http://10.0.2.2:8080/index.html" />
+        <content src="index.html" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
-        <content src="http://localhost:8080/index.html" />
+        <content src="index.html" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <allow-navigation href="http://*/*" />

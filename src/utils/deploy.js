@@ -81,7 +81,7 @@ function parseAsJSON(text) {
 
 export function load(callback) {
   readFile('config.json', function(e, text) {
-      config = parseAsJSON(text);
+      let config = parseAsJSON(text);
 
       // load defaults
       config.address = config.address || '127.0.0.1:3000';
@@ -95,3 +95,51 @@ export function save(data, callback) {
       callback();
   });
 }
+
+export function downloadZip(options) {
+  var uri;
+  var sync;
+  var theHeaders = options.headers;
+  if(options.update === true) {
+      uri = encodeURI(options.address + '/__api__/update');
+      sync = ContentSync.sync({ src: uri, id: 'phonegapdevapp', type: 'merge', copyCordovaAssets: false, headers: theHeaders });
+      sync.on('complete', function(data) {
+          window.location.reload();
+      });
+  } else {
+      uri = encodeURI(options.address + '/__api__/appzip');
+      console.log(uri);
+      sync = ContentSync.sync({ src: uri, id: 'phonegapdevapp', type: 'replace', copyCordovaAssets: true, headers: theHeaders });
+      sync.on('complete', function(data) {
+          window.location.href = data.localPath + '/www/index.html';
+      });
+  }
+
+  sync.on('progress', function(data) {
+      if(options.onProgress) {
+          options.onProgress(data);
+      }
+  });
+
+  sync.on('error', function(e){
+      if (options.onDownloadError) {
+          setTimeout(function() {
+              options.onDownloadError(e);
+          }, 10);
+      }
+      console.log("download error " + e);
+  });
+
+  document.addEventListener('cancelSync', function(e) {
+      sync.cancel();
+  });
+
+  sync.on('cancel', function(e) {
+      if (options.onCancel) {
+          setTimeout(function() {
+              options.onCancel(e);
+          }, 10);
+      }
+      console.log("download cancelled by user");
+  });
+};

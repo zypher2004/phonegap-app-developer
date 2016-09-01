@@ -35,7 +35,6 @@ function startApp() {
 
 if (!window.cordova) {
   console.log(`Cordova not found, starting anyways`);
-  console.log(save)
   startApp();
 } else {
   console.log(`Cordova found, starting now`);
