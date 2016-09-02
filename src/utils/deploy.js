@@ -143,3 +143,22 @@ export function downloadZip(options) {
       console.log("download cancelled by user");
   });
 };
+
+export function scanQRCode(success, error) {
+  cordova.plugins.barcodeScanner.scan(
+    success,
+    error,
+    { 
+      "preferFrontCamera" : false,
+      "showFlipCameraButton" : true,
+      "prompt" : "Place QR code for server address in the scan area",
+      "formats" : "QR_CODE,PDF_417"
+    }
+  ); 
+};
+
+export function cleanAddress(address) {
+    // default to http:// when no protocol exists
+    address = (address.match(/^(.*:\/\/)/)) ? address : 'http://' + address;
+    return address;
+}
