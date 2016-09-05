@@ -1,0 +1,12 @@
+.connect-pane {
+  padding: 10px;
+}
+
+.connect-pane .or-spacer {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.connect-pane input {
+  margin: 10px 0;
+}

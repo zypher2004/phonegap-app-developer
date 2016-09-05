@@ -5,7 +5,9 @@ import { Provider } from 'react-redux';
 import { Redirect, Router, Route, hashHistory } from 'react-router';
 
 import App from 'containers/App';
-import Main from 'containers/Main';
+import MainPage from 'containers/MainPage';
+import ConnectTab from 'containers/ConnectTab';
+import SavedTab from 'containers/SavedTab';
 import configureStore from 'stores/configureStore';
 
 const store = configureStore();
@@ -17,8 +19,11 @@ ReactDOM.render((
   <Provider store={ store }>
     <Router history={ hashHistory }>
       <Route component={ App }>
-        <Route path="main" component={ Main } />
-        <Redirect from="/" to="/main" />
+        <Route path="main" component={ MainPage }>
+          <Route path="connect" component={ ConnectTab } />
+          <Route path="saved" component={ SavedTab } />
+        </Route>
+        <Redirect from="/" to="/main/connect" />
       </Route>
     </Router>
   </Provider>

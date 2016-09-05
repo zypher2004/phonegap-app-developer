@@ -27,7 +27,7 @@ const App = React.createClass({
       location: { pathname: key, action: direction },
     } = this.props;
 
-    const props = {
+    const childProps = {
       key,
       direction: direction.toLowerCase(),
     };
@@ -39,7 +39,7 @@ const App = React.createClass({
     return (
       <div className={ cx }>
         <TransitionGroup className="transitiongroup">
-          { React.cloneElement(this.props.children || <div />, props) }
+          { React.cloneElement(this.props.children || <div />, childProps) }
         </TransitionGroup>
       </div>
     );
