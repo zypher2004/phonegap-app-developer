@@ -18,7 +18,7 @@ const SavedTab = React.createClass({
 
   render() {
     return (
-      <SavedPane />
+      <SavedPane handleButtonClick={ this.handleButtonClick } />
     );
   },
 });
