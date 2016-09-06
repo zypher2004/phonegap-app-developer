@@ -1,2 +1,1 @@
-import ConnectTab from './ConnectTab';
-export default ConnectTab;
+export default from './ConnectTab';

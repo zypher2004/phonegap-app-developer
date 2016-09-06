@@ -10,18 +10,18 @@ const MainHeader = (props) => (
     <IconButton
       quiet
       clickHandler={ () => props.handleIconButtonClick('settings') }
-    >
-      <img src="img/ic_settings_black_24px.svg" alt="setings icon" />
-    </IconButton>
+      style={ { background: 'url(img/ic_settings_black_24px.svg) center center no-repeat' } }
+      title="Settings"
+    />
     <div className="logo">
       <img src="img/PhoneGap-Symbol-Black.svg" alt="logo" />
     </div>
     <IconButton
       quiet
       clickHandler={ () => props.handleIconButtonClick('help') }
-    >
-      <img src="img/ic_help_black_24px.svg" alt="help icon" />
-    </IconButton>
+      style={ { background: 'url(img/ic_help_black_24px.svg) center center no-repeat' } }
+      title="Help"
+    />
   </div>
 );
 

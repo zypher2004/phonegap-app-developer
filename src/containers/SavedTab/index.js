@@ -1,2 +1,1 @@
-import SavedTab from './SavedTab';
-export default SavedTab;
+export default from './SavedTab';

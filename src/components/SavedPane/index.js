@@ -1,2 +1,1 @@
-import SavedPane from './SavedPane';
-export default SavedPane;
+export default from './SavedPane';

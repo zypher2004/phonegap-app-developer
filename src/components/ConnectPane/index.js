@@ -1,2 +1,1 @@
-import ConnectPane from './ConnectPane';
-export default ConnectPane;
+export default from './ConnectPane';
