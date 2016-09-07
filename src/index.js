@@ -10,7 +10,7 @@ import ConnectTab from 'containers/ConnectTab';
 import SavedTab from 'containers/SavedTab';
 import configureStore from 'stores/configureStore';
 
-import { save, load } from 'utils/deploy';
+import { save, load, downloadZip } from 'utils/deploy';
 
 const store = configureStore();
 
@@ -23,7 +23,7 @@ function startApp() {
       <Router history={ hashHistory }>
         <Route component={ App }>
           <Route path="main" component={ MainPage }>
-            <Route path="connect" component={ ConnectTab } />
+            <Route path="connect" data="seriosuly wtf" component={ ConnectTab } />
             <Route path="saved" component={ SavedTab } />
           </Route>
           <Redirect from="/" to="/main/connect" />

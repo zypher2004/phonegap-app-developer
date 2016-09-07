@@ -99,7 +99,7 @@ export function save(data, callback) {
 export function downloadZip(options) {
   var uri;
   var sync;
-  var theHeaders = options.headers;
+  var theHeaders = null;
   if(options.update === true) {
       uri = encodeURI(options.address + '/__api__/update');
       sync = ContentSync.sync({ src: uri, id: 'phonegapdevapp', type: 'merge', copyCordovaAssets: false, headers: theHeaders });

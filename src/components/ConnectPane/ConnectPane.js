@@ -4,6 +4,7 @@ import { Button, TextInput } from 'phonegap-topcoat-react';
 
 import './index.css';
 
+let connectURL;
 // TODO This might be refactored to just accept children
 const ConnectPane = (props) => (
   <div className="connect-pane">
@@ -18,12 +19,12 @@ const ConnectPane = (props) => (
       - or -
     </div>
     <label htmlFor="connectURL">Enter server address
-      <TextInput name="connectURL" full />
+      <TextInput name="connectURL" value={ props.connectURL } onChange={ (e) => props.handleOnChange(e) } ref={node => (connectURL = node)} full />
     </label>
     <Button
       full
       cta
-      clickHandler={ () => props.handleButtonClick('connect') }
+      clickHandler={ () => props.handleButtonClick('connect', connectURL.refs.input.value) }
     >
       Connect
     </Button>
