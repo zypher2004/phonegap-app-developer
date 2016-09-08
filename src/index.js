@@ -10,8 +10,6 @@ import ConnectTab from 'containers/ConnectTab';
 import SavedTab from 'containers/SavedTab';
 import configureStore from 'stores/configureStore';
 
-import { save, load, downloadZip } from 'utils/deploy';
-
 const store = configureStore();
 
 import './topcoat-mobile-light.min.css';
@@ -34,10 +32,10 @@ function startApp() {
 }
 
 if (!window.cordova) {
-  console.log(`Cordova not found, starting anyways`);
+  console.log('Cordova not found, starting anyways');
   startApp();
 } else {
-  console.log(`Cordova found, starting now`);
+  console.log('Cordova found, starting now');
   document.addEventListener('deviceready', startApp, false);
 }
 

@@ -19,7 +19,13 @@ const ConnectPane = (props) => (
       - or -
     </div>
     <label htmlFor="connectURL">Enter server address
-      <TextInput name="connectURL" value={ props.connectURL } onChange={ (e) => props.handleOnChange(e) } ref={node => (connectURL = node)} full />
+      <TextInput
+        name="connectURL"
+        value={ props.connectURL }
+        onChange={ (e) => props.handleOnChange(e) }
+        ref={ node => (connectURL = node) }
+        full
+      />
     </label>
     <Button
       full

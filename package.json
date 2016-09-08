@@ -29,6 +29,7 @@
     "build": "node config && webpack --progress -d",
     "prod": "NODE_ENV=production node config && NODE_ENV=production webpack --progress -p",
     "start": "node config && HOST=0.0.0.0 webpack-dev-server",
+    "lint": "eslint \"src/**/*.js\"; exit 0",
     "test": "NODE_ENV=production NODE_PATH=$NODE_PATH:$PWD/src mocha \"./src/**/*_test.js\" --compilers js:babel-core/register,css:css-null-compiler.js --recursive --require ./test/setup.js"
   },
   "dependencies": {

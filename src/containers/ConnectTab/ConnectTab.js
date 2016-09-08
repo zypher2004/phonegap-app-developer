@@ -12,54 +12,61 @@ const ConnectTab = React.createClass({
     history: React.PropTypes.object,
   },
 
-  connectToServer(address) {
-    let config = { address }
-    save(config, () => console.log(`Saved server address ${address}`));
-    downloadZip(config);
+  getInitialState() {
+    return { data: {} };
   },
 
   componentDidMount() {
     // load in last saved address
     load(loaded => {
       const addr = loaded.address;
-      this.setState( { data : addr } );
+      this.setState({ data: addr });
     });
   },
 
-  getInitialState() {
-    return { data : {} };
+  connectToServer(address) {
+    const config = { address };
+    save(config, () => console.log(`Saved server address ${address}`));
+    downloadZip(config);
   },
 
   handleButtonClick(button, data) {
     console.log(`${button} button clicked`);
     let address;
 
-    switch(button) {
-      case "scan":
+    switch (button) {
+      case 'scan':
         scanQRCode(result => {
           address = cleanAddress(result.text);
-          this.setState( { data : address });
+          this.setState({ data: address });
           this.connectToServer(this.state.data);
         },
         error => {
-          alert(`Unable to scan: ${error}`);
+          navigator.notification.alert(`Unable to scan: ${error}`);
         });
         break;
-      case "connect":
+      case 'connect':
         address = cleanAddress(data);
-        this.connectToServer(data);
+        this.setState({ data: address });
+        this.connectToServer(address);
         break;
+      default:
+        console.log(button);
     }
   },
 
   handleTextChange(e) {
-    this.setState( { data: e.target.value } );
+    this.setState({ data: e.target.value });
   },
 
   render() {
     // TODO other handlers like those for the combobox will be passed as well
     return (
-      <ConnectPane connectURL={ this.state.data } handleButtonClick={ this.handleButtonClick } handleOnChange={ this.handleTextChange }/>
+      <ConnectPane
+        connectURL={ this.state.data }
+        handleButtonClick={ this.handleButtonClick }
+        handleOnChange={ this.handleTextChange }
+      />
     );
   },
 });
