@@ -5,7 +5,9 @@ machine:
 general:
   artifacts:
     - "/home/ubuntu/phonegap-app-developer/platforms/android/build/outputs/apk/"
-
+  branches:
+    ignore:
+      - v2.0.0-dev-new
 deployment:
   production:
     branch: [continuous-integration, dev]
