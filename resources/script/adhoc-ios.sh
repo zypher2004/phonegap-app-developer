@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+echo "Running: spawn debug"
+node ./resources/script/spawn-debug.js
+
 echo "Running: npm run build"
 npm run build
 
