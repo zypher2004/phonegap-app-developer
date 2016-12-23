@@ -11,7 +11,7 @@
   "scripts": {
     "adhoc-ios": "bash ./resources/script/adhoc-ios.sh",
     "start": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress",
-    "build": "grep version node_modules/webpack/package.json && chmod +x node_modules/webpack/bin/webpack.js && cross-env NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p --progress --display-reasons --display-error-details",
+    "build": "ls -al ./node_modules/.bin && ls -al ./node_modules/webpack/bin && chmod +x ./node_modules/webpack/bin/webpack.js && cross-env NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p --progress --display-reasons --display-error-details",
     "prebuild": "mkdirp www/assets && ncp src/assets www/assets",
     "lint": "eslint --ignore-pattern src/assets {src,test}",
     "test": "NODE_ENV=production NODE_PATH=$NODE_PATH:$PWD/src mocha \"./src/**/*_test.js\" --compilers js:babel-core/register,css:css-null-compiler.js --recursive --require ./tests/setup.js",
