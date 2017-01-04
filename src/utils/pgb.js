@@ -2,6 +2,7 @@
 
 import fetch from 'isomorphic-fetch';
 import semver from 'semver';
+import querystring from 'query-string';
 
 const apiHost = 'https://build.phonegap.com';
 
@@ -34,21 +35,6 @@ function getClientID() {
   });
 }
 
-function getQueryString(url) {
-  const a = url.slice((url.indexOf('?') + 1)).split('&');
-  if (a === '') return {};
-  const b = {};
-  a.forEach((i) => {
-    const p = i.split('=', 2);
-    if (p.length === 1) {
-      b[p[0]] = '';
-    } else {
-      b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, ' '));
-    }
-  });
-  return b;
-}
-
 function showAuthWindow(clientID) {
   const authWindow = cordova.InAppBrowser.open(
     `${apiHost}/authorize?client_id=${clientID}`,
@@ -61,7 +47,7 @@ function showAuthWindow(clientID) {
       const url = e.url;
       if (url.match(/^(https?:\/\/)phonegap\.com\/?\?(code|error)=[a-zA-Z0-9_]*$/)) {
         console.log('Callback url found.');
-        const qs = getQueryString(url);
+        const qs = querystring.parse(querystring.extract(url));
         if (qs.code || qs.error) {
           authWindow.close();
           resolve(qs.code, qs.error);

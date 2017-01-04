@@ -28,6 +28,7 @@
     "preact-portal": "^1.1.1",
     "preact-redux": "^1.2.0",
     "preact-transition-group": "^1.1.0",
+    "query-string": "^4.2.3",
     "react-animated-views": "git+https://github.com/devgeeks/react-animated-views.git",
     "react-fastclick-alt": "^1.1.1",
     "react-intl": "^2.1.5",
