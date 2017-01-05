@@ -181,8 +181,7 @@ export function analyzePlugins(appID, accessToken) {
   ));
 }
 
-
-function loadApp(appID, src) {
+function fetchApp(appID, src) {
   return new Promise((resolve, reject) => {
     console.log(`Loading app ${appID}`);
     const sync = ContentSync.sync({
@@ -205,27 +204,27 @@ function loadApp(appID, src) {
 
     sync.on('complete', (data) => {
       console.log('sync complete', data);
-      window.resolveLocalFileSystemURL(`file://${data.localPath}/index.html`, () => {
-        console.log(`Found file://${data.localPath}/index.html, loading it`);
-        window.location.href = `file://${data.localPath}/index.html`;
-        resolve();
+      const path = `file://${data.localPath}/index.html`;
+      window.resolveLocalFileSystemURL(path, () => {
+        console.log(`Found ${path}, loading it`);
+        resolve(path);
       }, () => {
-        console.log(`Didn't find file://${data.localPath}/index.html, trying nested www`);
-        window.location.href = `file://${data.localPath}/www/index.html`;
-        resolve();
+        console.log(`Didn't find ${path}, trying nested www`);
+        resolve(`file://${data.localPath}/www/index.html`);
       });
     });
   });
 }
 
-export function fetchAppZipUrl(appID, accessToken) {
+export function loadApp(appID, accessToken) {
   console.log(`fetching app ${appID}`);
 
   return (fetch(`${apiHost}/api/v1/apps/${appID}/www?access_token=${accessToken}`)
   .then(response =>
     response.json().then(json => json.www_url)
   ).then(url =>
-    loadApp(appID, url)
+    fetchApp(appID, url)
+  ).then(path =>
+    window.location.href = path
   ));
 }
-

@@ -15,7 +15,7 @@ import {
   createSampleApp,
   analyzePlugins,
   checkPhonegapVersion,
-  fetchAppZipUrl,
+  loadApp,
 } from 'actions/pgbSessionActions';
 
 class CloudAppsDetail extends Component {

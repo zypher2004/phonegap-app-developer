@@ -65,15 +65,15 @@ export function pgbCheckPhonegapVersion(state) {
   };
 }
 
-export function pgbAppZipUrlRequested() {
+export function pgbLoadAppRequested() {
   return {
-    type: 'PGB_APP_ZIP_URL_REQUESTED',
+    type: 'PGB_LOAD_APP_REQUESTED',
   };
 }
 
-export function pgbAppZipUrlReceived(url) {
+export function pgbLoadAppReceived(url) {
   return {
-    type: 'PGB_APP_ZIP_URL_RECEIVED',
+    type: 'PGB_LOAD_APP_RECEIVED',
     url,
   };
 }
@@ -137,13 +137,13 @@ export function analyzePlugins(appID, accessToken) {
   };
 }
 
-export function fetchAppZipUrl(appID, accessToken) {
+export function loadApp(appID, accessToken) {
   return (dispatch) => {
-    dispatch(pgbAppZipUrlRequested());
+    dispatch(pgbLoadAppRequested());
 
-    return pgb.fetchAppZipUrl(appID, accessToken)
+    return pgb.loadApp(appID, accessToken)
     .then((url) => {
-      dispatch(pgbAppZipUrlReceived(url));
+      dispatch(pgbLoadAppReceived(url));
     });
   };
 }
