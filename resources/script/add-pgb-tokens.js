@@ -8,8 +8,6 @@
  */
 
 var projectRoot = require('app-root-path').path;
-var configPath = path.join(projectRoot, 'config.xml');
-
 
 console.log('Running: adding PGB O-Auth tokens');
 
