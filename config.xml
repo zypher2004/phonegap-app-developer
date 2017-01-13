@@ -7,7 +7,7 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         Adobe PhoneGap Team
     </author>
-    <hook src="resources/script/add-pgb-tokens.js" type="before_build" />
+    <hook src="resources/script/add-pgb-tokens.js" type="before_prepare" />
     <platform name="ios">
         <preference name="Orientation" value="all" />
     </platform>
