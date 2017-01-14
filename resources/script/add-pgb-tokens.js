@@ -18,68 +18,63 @@ var androidFile = path.join(PGBPluginPath, 'src/android/src/com/phonegap/build/o
 var iosFile = path.join(PGBPluginPath, 'src/ios/CDVPhonegapBuildOauth.m');
 
 // modify Phonegap Build Oauth files to include keys
-fs.readFile(PGBTokenFile, 'utf8', function(err, data) {
+var pgbKeys = {
+    "client_id": process.env.PGB_OAUTH_CLIENT_ID || '',
+    "client_secret": process.env.PGB_OAUTH_CLIENT_SECRET || ''
+}
+
+fs.readFile(androidFile, 'utf8', function(err, androidData) {
     if (err) {
-        console.log('Error reading', PGBTokenFile);
+        console.log('Error reading', androidFile);
         console.log('More info: <', err.message, '>');
         process.exit(1);
     }
 
-    var pgbKeys = JSON.parse(data);
-    
-    fs.readFile(androidFile, 'utf8', function(err, androidData) {
-        if (err) {
-            console.log('Error reading', androidFile);
-            console.log('More info: <', err.message, '>');
-            process.exit(1);
-        }
+    // insert pgb android token
+    var androidClientID = /private String CLIENT_ID = "";/;
+    var androidClientSecret = /private String CLIENT_SECRET = "";/;
 
-        // insert pgb android token
-        var androidClientID = /private String CLIENT_ID = "";/;
-        var androidClientSecret = /private String CLIENT_SECRET = "";/;
+    if ((androidClientID).test(androidData) && (androidClientSecret).test(androidData)) {
+        androidData = androidData.replace(androidClientID, 'private String CLIENT_ID = "' + pgbKeys.client_id + '";');
+        androidData = androidData.replace(androidClientSecret, 'private String CLIENT_ID = "' + pgbKeys.client_secret + '";');
 
-        if ((androidClientID).test(androidData) && (androidClientSecret).test(androidData)) {
-            androidData = androidData.replace(androidClientID, 'private String CLIENT_ID = "' + pgbKeys.client_id + '";');
-            androidData = androidData.replace(androidClientSecret, 'private String CLIENT_ID = "' + pgbKeys.client_secret + '";');
+        // write back to analytic.js
+        fs.writeFile(androidFile, androidData, 'utf8', function(err) {
+            if (err) {
+                console.log('Error writing to', androidFile);
+                console.log('More info: <', err.message, '>');
+                process.exit(1);
+            }
+        });
+    } else {
+        console.log('Exiting: unable to find PGB token strings to replace in Android');
+    } 
+});
 
-            // write back to analytic.js
-            fs.writeFile(androidFile, androidData, 'utf8', function(err) {
-                if (err) {
-                    console.log('Error writing to', androidFile);
-                    console.log('More info: <', err.message, '>');
-                    process.exit(1);
-                }
-            });
-        } else {
-            console.log('Exiting: unable to find PGB token strings to replace in Android');
-        }     
-    });
+fs.readFile(iosFile, 'utf8', function(err, iosData) {
+    if (err) {
+        console.log('Error reading', iosFile);
+        console.log('More info: <', err.message, '>');
+        process.exit(1);
+    }
 
-    fs.readFile(iosFile, 'utf8', function(err, iosData) {
-        if (err) {
-            console.log('Error reading', iosFile);
-            console.log('More info: <', err.message, '>');
-            process.exit(1);
-        }
+    // insert pgb ios token
+    var iosClientID = /NSString\* CLIENT_ID = @"";/;
+    var iosClientSecret = /NSString\* CLIENT_SECRET = @"";/;
 
-        // insert pgb ios token
-        var iosClientID = /NSString\* CLIENT_ID = @"";/;
-        var iosClientSecret = /NSString\* CLIENT_SECRET = @"";/;
+    if ((iosClientID).test(iosData) && (iosClientSecret).test(iosData)) {
+        iosData = iosData.replace(iosClientID, 'NSString* CLIENT_ID = @"' + pgbKeys.client_id + '";');
+        iosData = iosData.replace(iosClientSecret, 'NSString* CLIENT_SECRET = @"' + pgbKeys.client_secret +'";');
 
-        if ((iosClientID).test(iosData) && (iosClientSecret).test(iosData)) {
-            iosData = iosData.replace(iosClientID, 'NSString* CLIENT_ID = @"' + pgbKeys.client_id + '";');
-            iosData = iosData.replace(iosClientSecret, 'NSString* CLIENT_SECRET = @"' + pgbKeys.client_secret +'";');
-
-            // write back to analytic.js
-            fs.writeFile(iosFile, iosData, 'utf8', function(err) {
-                if (err) {
-                    console.log('Error writing to', iosFile);
-                    console.log('More info: <', err.message, '>');
-                    process.exit(1);
-                }
-            });
-        } else {
-            console.log('Exiting: unable to find PGB token strings to replace in iOS');
-        } 
-    });
+        // write back to analytic.js
+        fs.writeFile(iosFile, iosData, 'utf8', function(err) {
+            if (err) {
+                console.log('Error writing to', iosFile);
+                console.log('More info: <', err.message, '>');
+                process.exit(1);
+            }
+        });
+    } else {
+        console.log('Exiting: unable to find PGB token strings to replace in iOS');
+    }
 });
