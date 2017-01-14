@@ -16,7 +16,7 @@ var PGBPluginPath = path.join(projectRoot, 'plugins/phonegap-plugin-pgb-oauth');
 
 var androidFile = path.join(PGBPluginPath, 'src/android/src/com/phonegap/build/oauth/PhonegapBuildOauth.java');
 var iosFile = path.join(PGBPluginPath, 'src/ios/CDVPhonegapBuildOauth.m');
-
+console.log(process.env);
 // modify Phonegap Build Oauth files to include keys
 fs.readFile(PGBTokenFile, 'utf8', function(err, data) {
     if (err) {
